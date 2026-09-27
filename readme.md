@@ -1,3 +1,3 @@
 # ED Wait Time
 
-Hospital Patient Wwait time
+Hospital Patient Wait time Prediction
