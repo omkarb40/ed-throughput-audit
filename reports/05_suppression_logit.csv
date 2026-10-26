@@ -1,0 +1,15 @@
+,odds_ratio,p
+Intercept,0.011,0.0
+C(type)[T.Critical Access Hospitals],5.718,0.0
+C(edv_cat)[T.2 medium],0.086,0.0
+C(edv_cat)[T.3 high],0.085,0.0
+C(edv_cat)[T.4 very high],0.042,0.0
+C(own)[T.Physician],22.631,0.0
+C(own)[T.Proprietary],2.652,0.0
+C(own)[T.Tribal],18.172,0.0
+C(own)[T.Voluntary non-profit],1.035,0.782
+C(year)[T.2019.0],0.771,0.195
+C(year)[T.2021.0],0.952,0.783
+C(year)[T.2022.0],0.892,0.518
+C(year)[T.2023.0],0.967,0.844
+C(year)[T.2024.0],0.923,0.641

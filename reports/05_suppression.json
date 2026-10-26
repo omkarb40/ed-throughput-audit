@@ -1,0 +1,210 @@
+{
+ "overall": {
+  "clean": 22705,
+  "suppressed": 3885,
+  "flagged": 1648
+ },
+ "type": [
+  {
+   "type": "Acute Care Hospitals",
+   "clean": 87.9,
+   "flagged": 2.2,
+   "suppressed": 9.9,
+   "n": 19298
+  },
+  {
+   "type": "Critical Access Hospitals",
+   "clean": 68.4,
+   "flagged": 14.9,
+   "suppressed": 16.8,
+   "n": 8175
+  },
+  {
+   "type": "Childrens",
+   "clean": 0.0,
+   "flagged": 0.0,
+   "suppressed": 100.0,
+   "n": 558
+  },
+  {
+   "type": "Acute Care - Department of Defense",
+   "clean": 89.9,
+   "flagged": 3.6,
+   "suppressed": 6.5,
+   "n": 169
+  },
+  {
+   "type": "Rural Emergency Hospital",
+   "clean": 0.0,
+   "flagged": 0.0,
+   "suppressed": 100.0,
+   "n": 38
+  }
+ ],
+ "edv_cat": [
+  {
+   "edv_cat": "1 low",
+   "clean": 87.2,
+   "flagged": 8.5,
+   "suppressed": 4.3,
+   "n": 9263
+  },
+  {
+   "edv_cat": "missing",
+   "clean": 33.9,
+   "flagged": 11.9,
+   "suppressed": 54.2,
+   "n": 6412
+  },
+  {
+   "edv_cat": "2 medium",
+   "clean": 99.0,
+   "flagged": 0.9,
+   "suppressed": 0.1,
+   "n": 5430
+  },
+  {
+   "edv_cat": "4 very high",
+   "clean": 99.3,
+   "flagged": 0.7,
+   "suppressed": 0.1,
+   "n": 3831
+  },
+  {
+   "edv_cat": "3 high",
+   "clean": 99.2,
+   "flagged": 0.7,
+   "suppressed": 0.1,
+   "n": 3302
+  }
+ ],
+ "emergency_services": [
+  {
+   "emergency_services": "Yes",
+   "clean": 84.0,
+   "flagged": 6.1,
+   "suppressed": 9.9,
+   "n": 25948
+  },
+  {
+   "emergency_services": "No",
+   "clean": 39.5,
+   "flagged": 3.3,
+   "suppressed": 57.2,
+   "n": 2290
+  }
+ ],
+ "own": [
+  {
+   "own": "Voluntary non-profit",
+   "clean": 84.4,
+   "flagged": 5.0,
+   "suppressed": 10.7,
+   "n": 17140
+  },
+  {
+   "own": "Government",
+   "clean": 73.9,
+   "flagged": 10.3,
+   "suppressed": 15.8,
+   "n": 5913
+  },
+  {
+   "own": "Proprietary",
+   "clean": 79.1,
+   "flagged": 3.6,
+   "suppressed": 17.2,
+   "n": 4465
+  },
+  {
+   "own": "Physician",
+   "clean": 38.3,
+   "flagged": 2.6,
+   "suppressed": 59.1,
+   "n": 460
+  },
+  {
+   "own": "Department of Defense",
+   "clean": 89.9,
+   "flagged": 3.6,
+   "suppressed": 6.5,
+   "n": 169
+  },
+  {
+   "own": "Tribal",
+   "clean": 16.5,
+   "flagged": 6.6,
+   "suppressed": 76.9,
+   "n": 91
+  }
+ ],
+ "year": [
+  {
+   "year": 2019.0,
+   "clean": 77.4,
+   "flagged": 7.7,
+   "suppressed": 14.9,
+   "n": 4775
+  },
+  {
+   "year": 2018.0,
+   "clean": 81.0,
+   "flagged": 4.5,
+   "suppressed": 14.5,
+   "n": 4757
+  },
+  {
+   "year": 2021.0,
+   "clean": 80.3,
+   "flagged": 6.1,
+   "suppressed": 13.6,
+   "n": 4708
+  },
+  {
+   "year": 2022.0,
+   "clean": 82.0,
+   "flagged": 4.8,
+   "suppressed": 13.3,
+   "n": 4692
+  },
+  {
+   "year": 2024.0,
+   "clean": 81.0,
+   "flagged": 6.0,
+   "suppressed": 13.0,
+   "n": 4659
+  },
+  {
+   "year": 2023.0,
+   "clean": 80.8,
+   "flagged": 6.0,
+   "suppressed": 13.1,
+   "n": 4647
+  }
+ ],
+ "suppressed_reasons": {
+  "5": 2932,
+  "19": 858,
+  "1,3": 56,
+  "3,7": 15,
+  "12": 11,
+  "1": 8,
+  "7": 5
+ },
+ "balanced_compare": [
+  {
+   "balanced": false,
+   "hospitals": 725,
+   "median_op18b": 120.0,
+   "pct_cah": 48.5,
+   "pct_low_volume": 51.8
+  },
+  {
+   "balanced": true,
+   "hospitals": 3680,
+   "median_op18b": 148.0,
+   "pct_cah": 25.8,
+   "pct_low_volume": 34.8
+  }
+ ]
+}
