@@ -1,0 +1,180 @@
+{
+ "quantiles_by_type": [
+  {
+   "type": "Acute Care - Department of Defense",
+   "0.0": 59.0,
+   "0.01": 63.0,
+   "0.05": 91.0,
+   "0.25": 120.0,
+   "0.5": 146.0,
+   "0.75": 174.0,
+   "0.95": 214.0,
+   "0.99": 253.0,
+   "1.0": 260.0,
+   "n": 158,
+   "skew": 0.29,
+   "skew_log": -0.57
+  },
+  {
+   "type": "Acute Care Hospitals",
+   "0.0": 49.0,
+   "0.01": 80.0,
+   "0.05": 101.0,
+   "0.25": 134.0,
+   "0.5": 162.0,
+   "0.75": 196.0,
+   "0.95": 256.0,
+   "0.99": 318.0,
+   "1.0": 1344.0,
+   "n": 17392,
+   "skew": 1.78,
+   "skew_log": -0.02
+  },
+  {
+   "type": "Critical Access Hospitals",
+   "0.0": 38.0,
+   "0.01": 62.0,
+   "0.05": 76.0,
+   "0.25": 96.0,
+   "0.5": 112.0,
+   "0.75": 128.0,
+   "0.95": 159.0,
+   "0.99": 189.0,
+   "1.0": 432.0,
+   "n": 6803,
+   "skew": 1.12,
+   "skew_log": -0.1
+  }
+ ],
+ "n_beyond_q3_3iqr": 44,
+ "overlap": [
+  {
+   "gap_months": 3,
+   "overlap_months": 9,
+   "pairs": 23,
+   "r_log": 0.99,
+   "median_abs_diff_min": 3.0
+  },
+  {
+   "gap_months": 6,
+   "overlap_months": 6,
+   "pairs": 21,
+   "r_log": 0.977,
+   "median_abs_diff_min": 5.0
+  },
+  {
+   "gap_months": 9,
+   "overlap_months": 3,
+   "pairs": 20,
+   "r_log": 0.962,
+   "median_abs_diff_min": 7.0
+  },
+  {
+   "gap_months": 12,
+   "overlap_months": 0,
+   "pairs": 19,
+   "r_log": 0.945,
+   "median_abs_diff_min": 9.0
+  },
+  {
+   "gap_months": 15,
+   "overlap_months": 0,
+   "pairs": 2,
+   "r_log": 0.909,
+   "median_abs_diff_min": 12.5
+  },
+  {
+   "gap_months": 18,
+   "overlap_months": 0,
+   "pairs": 2,
+   "r_log": 0.9,
+   "median_abs_diff_min": 13.5
+  },
+  {
+   "gap_months": 21,
+   "overlap_months": 0,
+   "pairs": 2,
+   "r_log": 0.892,
+   "median_abs_diff_min": 16.0
+  },
+  {
+   "gap_months": 24,
+   "overlap_months": 0,
+   "pairs": 11,
+   "r_log": 0.91,
+   "median_abs_diff_min": 12.0
+  },
+  {
+   "gap_months": 27,
+   "overlap_months": 0,
+   "pairs": 3,
+   "r_log": 0.883,
+   "median_abs_diff_min": 17.0
+  },
+  {
+   "gap_months": 30,
+   "overlap_months": 0,
+   "pairs": 1,
+   "r_log": 0.863,
+   "median_abs_diff_min": 13.0
+  },
+  {
+   "gap_months": 33,
+   "overlap_months": 0,
+   "pairs": 1,
+   "r_log": 0.864,
+   "median_abs_diff_min": 20.0
+  },
+  {
+   "gap_months": 39,
+   "overlap_months": 0,
+   "pairs": 7,
+   "r_log": 0.857,
+   "median_abs_diff_min": 20.0
+  }
+ ],
+ "calendar_year_agreement": [
+  {
+   "from": 2018,
+   "to": 2019,
+   "n": 3962,
+   "r_log": 0.935,
+   "median_abs_change_min": 8.0
+  },
+  {
+   "from": 2021,
+   "to": 2022,
+   "n": 4010,
+   "r_log": 0.94,
+   "median_abs_change_min": 10.0
+  },
+  {
+   "from": 2022,
+   "to": 2023,
+   "n": 3968,
+   "r_log": 0.947,
+   "median_abs_change_min": 9.0
+  },
+  {
+   "from": 2023,
+   "to": 2024,
+   "n": 3966,
+   "r_log": 0.953,
+   "median_abs_change_min": 9.0
+  },
+  {
+   "from": 2019,
+   "to": 2021,
+   "n": 3959,
+   "r_log": 0.889,
+   "median_abs_change_min": 16.0
+  },
+  {
+   "from": 2018,
+   "to": 2024,
+   "n": 3742,
+   "r_log": 0.816,
+   "median_abs_change_min": 21.0
+  }
+ ]
+}
