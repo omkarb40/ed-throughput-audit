@@ -1,0 +1,7 @@
+split,part,rows,hospitals,years,pct_cah,pct_rural,median_op18b
+temporal,train,16265,4304,"2018,2019,2021,2022",27.2,21.2,142.0
+temporal,val,4036,4036,2023,28.8,21.5,152.0
+temporal,test,4052,4052,2024,29.8,21.8,148.0
+grouped_temporal,train,9900,2615,"2018,2019,2021,2022",27.1,21.0,142.0
+grouped_temporal,val,760,760,2023,31.1,22.4,148.0
+grouped_temporal,test,832,832,2024,28.0,21.9,150.0

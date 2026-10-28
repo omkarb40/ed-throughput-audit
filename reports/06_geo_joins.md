@@ -3,14 +3,14 @@
 Run 2026-10-25. Code: `src/build_geo.py`, `src/build_analysis_table.py`. Sources: `data/external_sources.md`.
 Outputs (git-ignored): `data/interim/hospital_geo.parquet`, `data/interim/analysis_table.parquet`.
 
-## Gate verdict: PASS for geography and rurality; ACS pending (API key)
+## Gate verdict: PASS (geography, rurality, ACS)
 
 | Join | Matched | Note |
 |---|---|---|
 | County FIPS | 4,921 / 4,922 | Only miss: 1 US Virgin Islands hospital (no RUCC coverage; out of scope) |
 | RUCC 2023 rurality | 4,921 / 4,922 | metro 2,978 · nonmetro adjacent/large 865 · rural 1,078 |
 | Coordinates | 4,921 / 4,922 | ZIP centroid 4,805 · county centroid 110 · CT town centroid 6 |
-| ACS 2022 county profile | — | Census API now requires a key; first two requests returned "Missing Key" / "Invalid Key" pages |
+| ACS 2022 5-yr county profile | 4,916 / 4,922 | 3,222 counties retrieved (API key required). Misses: 6 hospitals in VI, GU, AS, MP (not in ACS county profile) |
 
 ## County assignment: CMS name first, ZIP second
 
@@ -41,3 +41,17 @@ type, ownership_group, emergency_services, state, fips, rucc_2023, rurality, lat
 Caveat: rurality and ACS are single-vintage county attributes (2023 / 2018–22), so they are constant within a
 hospital over the panel. In the fixed-effects model (S11) they are absorbed by the hospital effect; they matter for
 the between-hospital model (S10, Model A) and for slicing (S15).
+
+## ACS county context (added 2026-10-27)
+
+Variables (codes checked against the official `variables.json` labels before use):
+DP05_0001E total population · DP03_0062E median household income · DP03_0099PE % no health insurance ·
+DP05_0024PE % aged 65+. Census negative sentinels are set to missing.
+
+| Rurality | County pop (median) | Median HH income | % uninsured | % 65+ |
+|---|---|---|---|---|
+| Metro | 406,608 | $72,537 | 7.9 | 16.0 |
+| Nonmetro adjacent/large | 44,339 | $58,496 | 8.3 | 19.0 |
+| Rural | 12,993 | $57,537 | 8.8 | 21.0 |
+
+The API key is passed at request time only; it is not stored in any project file.
