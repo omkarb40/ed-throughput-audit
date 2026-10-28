@@ -49,7 +49,24 @@ def evaluate(df, pred_col, y_col="op18b", n_boot=1000, seed=0):
 
 def evaluate_by(df, pred_col, by="type", **kw):
     rows = [{"group": "all", **evaluate(df, pred_col, **kw)}]
-    for g, sub in df.groupby(by):
+    for g, sub in df.groupby(by, observed=True):
         if sub[pred_col].notna().sum() >= 30:
             rows.append({"group": g, **evaluate(sub, pred_col, **kw)})
     return pd.DataFrame(rows)
+
+
+def paired_diff(df, model_col, base_col, y_col="op18b", n_boot=2000, seed=0):
+    """Bootstrap the difference model - baseline on the SAME rows. Negative MAE diff = model better;
+    positive Spearman diff = model better. Returns point estimate, 95% CI, and share of resamples where model wins."""
+    d = df[[y_col, model_col, base_col]].dropna()
+    y, a, b = (d[c].to_numpy(float) for c in (y_col, model_col, base_col))
+    def stats(i):
+        return (np.mean(np.abs(a[i] - y[i])) - np.mean(np.abs(b[i] - y[i])),
+                spearmanr(y[i], a[i]).statistic - spearmanr(y[i], b[i]).statistic)
+    pt = stats(np.arange(len(y)))
+    rng = np.random.default_rng(seed)
+    bs = np.array([stats(rng.integers(0, len(y), len(y))) for _ in range(n_boot)])
+    return {"n": len(y), "mae_diff_min": pt[0], "mae_diff_lo": np.percentile(bs[:, 0], 2.5),
+            "mae_diff_hi": np.percentile(bs[:, 0], 97.5), "p_model_lower_mae": float(np.mean(bs[:, 0] < 0)),
+            "spearman_diff": pt[1], "spearman_diff_lo": np.percentile(bs[:, 1], 2.5),
+            "spearman_diff_hi": np.percentile(bs[:, 1], 97.5)}

@@ -1,0 +1,74 @@
+{
+ "A": {
+  "val_rmse_rel_log": 0.21183209603635475,
+  "num_leaves": 31,
+  "min_child_samples": 50,
+  "n_estimators": 175,
+  "gain_share": {
+   "edv": 0.467,
+   "state": 0.15,
+   "log_county_pop": 0.119,
+   "type": 0.06,
+   "lon": 0.034,
+   "lat": 0.032,
+   "county_median_hh_income": 0.032,
+   "county_pct_65plus": 0.03,
+   "ownership_group": 0.027,
+   "county_pct_uninsured": 0.024,
+   "rucc_2023": 0.02,
+   "rurality": 0.004,
+   "emergency_services": 0.001
+  }
+ },
+ "A_no_volume": {
+  "val_rmse_rel_log": 0.21519168292094984,
+  "num_leaves": 15,
+  "min_child_samples": 20,
+  "n_estimators": 161,
+  "gain_share": {
+   "log_county_pop": 0.445,
+   "type": 0.199,
+   "state": 0.173,
+   "ownership_group": 0.05,
+   "lon": 0.032,
+   "county_median_hh_income": 0.026,
+   "lat": 0.024,
+   "county_pct_65plus": 0.017,
+   "county_pct_uninsured": 0.016,
+   "rucc_2023": 0.011,
+   "rurality": 0.006,
+   "emergency_services": 0.001
+  }
+ },
+ "B": {
+  "val_rmse_rel_log": 0.10290769391345135,
+  "num_leaves": 15,
+  "min_child_samples": 20,
+  "n_estimators": 179,
+  "gain_share": {
+   "log_prev": 0.268,
+   "state": 0.201,
+   "dev_from_history": 0.161,
+   "log_county_pop": 0.05,
+   "prev_edv": 0.05,
+   "type": 0.045,
+   "prev_op22_lwbs_pct": 0.039,
+   "n_prior_op18b": 0.036,
+   "prev_op18b_gap_years": 0.031,
+   "county_median_hh_income": 0.024,
+   "lon": 0.023,
+   "county_pct_uninsured": 0.022,
+   "lat": 0.019,
+   "county_pct_65plus": 0.018,
+   "ownership_group": 0.006,
+   "rucc_2023": 0.003,
+   "rurality": 0.002,
+   "emergency_services": 0.0
+  },
+  "train_target_years": [
+   2019,
+   2021,
+   2022
+  ]
+ }
+}

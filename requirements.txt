@@ -99,3 +99,5 @@ scipy>=1.15
 statsmodels>=0.14
 matplotlib>=3.9
 pytest>=8
+lightgbm>=4.0
+scikit-learn>=1.4
