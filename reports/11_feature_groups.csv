@@ -1,0 +1,17 @@
+population,features,share_true_between_explained
+all,type,0.312
+all,+ state,0.451
+all,+ ED volume,0.58
+all,"+ rurality, location",0.605
+all,"+ county population, income, insurance, age",0.613
+all,+ ownership (all),0.637
+acute care,+ state,0.198
+acute care,+ ED volume,0.425
+acute care,"+ rurality, location",0.48
+acute care,"+ county population, income, insurance, age",0.492
+acute care,+ ownership (all),0.533
+critical access,+ state,0.102
+critical access,+ ED volume,0.105
+critical access,"+ rurality, location",0.144
+critical access,"+ county population, income, insurance, age",0.151
+critical access,+ ownership (all),0.154

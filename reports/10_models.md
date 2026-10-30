@@ -45,9 +45,10 @@ with the chosen settings, 2024 scored once. Chosen: A 31 leaves / 50 min samples
 
 ## What this means
 
-1. **Structure helps, but only a fifth of the way.** Model A cuts the structural error from 29.0 to 25.5 minutes. The
-   gap between knowing only state and type (29.0) and knowing the hospital (11.9) is 17.1 minutes; public
-   characteristics close 3.4 of them, about 20%. The other 80% is specific to the individual hospital.
+1. **Beyond state and type, structure helps only a fifth of the way.** Model A cuts the structural error from 29.0 to
+   25.5 minutes. The gap between knowing only state and type (29.0) and knowing the hospital (11.9) is 17.1 minutes;
+   the remaining public characteristics close 3.4 of them, about 20%. This is a share of an error gap that remains
+   *after* state and type, not a share of variance; S11 gives the variance decomposition.
 2. **So "stable" does not mean "predictable from the outside".** S7 showed ED time barely moves year to year. S10 shows
    most of that stable part is not explained by size, type, location or county. That is the case *for* publishing
    each hospital's number: it carries information a patient could not infer.
