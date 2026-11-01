@@ -1,0 +1,126 @@
+{
+ "persistence_80": {
+  "n_cal": 3990,
+  "marginal_q": [
+   -0.13353139262452274,
+   0.11720716463557412
+  ],
+  "mondrian_q": {
+   "acute care": [
+    -0.12675170563914406,
+    0.1131148044378314
+   ],
+   "critical access": [
+    -0.1413135330665778,
+    0.11531084651099466
+   ],
+   "critical access, last value footnoted": [
+    -0.18502791839169763,
+    0.19516969927180394
+   ],
+   "acute care, last value footnoted": [
+    -0.18986876242933715,
+    0.1388364448542161
+   ]
+  },
+  "cal_group_sizes": {
+   "acute care": 2839,
+   "critical access": 947,
+   "critical access, last value footnoted": 180,
+   "acute care, last value footnoted": 24
+  }
+ },
+ "persistence_90": {
+  "n_cal": 3990,
+  "marginal_q": [
+   -0.17567701407528613,
+   0.15575452940923284
+  ],
+  "mondrian_q": {
+   "acute care": [
+    -0.16507975035944877,
+    0.1457878134614985
+   ],
+   "critical access": [
+    -0.18449783621655058,
+    0.15840600539739658
+   ],
+   "critical access, last value footnoted": [
+    -0.2694761079552084,
+    0.24807293435673472
+   ],
+   "acute care, last value footnoted": [
+    -0.19319122903085884,
+    0.23947997063390325
+   ]
+  },
+  "cal_group_sizes": {
+   "acute care": 2839,
+   "critical access": 947,
+   "critical access, last value footnoted": 180,
+   "acute care, last value footnoted": 24
+  }
+ },
+ "profile_80": {
+  "n_cal": 4036,
+  "marginal_q": [
+   -0.26982200354878483,
+   0.24662562243825636
+  ],
+  "mondrian_q": {
+   "acute care": [
+    -0.25485564052633336,
+    0.2663321328185644
+   ],
+   "critical access": [
+    -0.30850937643396836,
+    0.2037416083610024
+   ],
+   "critical access, last value footnoted": [
+    -0.2780173625135465,
+    0.2465591768325064
+   ],
+   "acute care, last value footnoted": [
+    -0.5107674650630223,
+    0.504717377590505
+   ]
+  },
+  "cal_group_sizes": {
+   "acute care": 2848,
+   "critical access": 984,
+   "critical access, last value footnoted": 180,
+   "acute care, last value footnoted": 24
+  }
+ },
+ "profile_90": {
+  "n_cal": 4036,
+  "marginal_q": [
+   -0.355842276531285,
+   0.3266119493029276
+  ],
+  "mondrian_q": {
+   "acute care": [
+    -0.3401039592452948,
+    0.3390900567186286
+   ],
+   "critical access": [
+    -0.4096367838648307,
+    0.2699726762795738
+   ],
+   "critical access, last value footnoted": [
+    -0.32367986591235987,
+    0.3129558174832825
+   ],
+   "acute care, last value footnoted": [
+    -0.903534034465296,
+    0.5264937942321337
+   ]
+  },
+  "cal_group_sizes": {
+   "acute care": 2848,
+   "critical access": 984,
+   "critical access, last value footnoted": 180,
+   "acute care, last value footnoted": 24
+  }
+ }
+}
