@@ -1,0 +1,5 @@
+bucket,pairs,pct_correct
+under 10 min,446,59.9
+10-20 min,410,77.6
+20-40 min,608,90.3
+over 40 min,1018,98.4

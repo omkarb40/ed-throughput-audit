@@ -1,0 +1,15 @@
+{
+ "first_window_start": "2017-04-01",
+ "window_start": "2024-10-01",
+ "window_end": "2025-09-30",
+ "cms_release": "2026-08-13",
+ "n_eds": 4174,
+ "n_published": 3914,
+ "n_no_current": 260,
+ "n_older_published": 48,
+ "n_profile": 212,
+ "coverage_90_older_backtest": "86-90",
+ "coverage_90_published_2024": 91.0,
+ "coverage_90_profile_2024": 90.2,
+ "repo": "https://github.com/omkarb40/ed-throughput-audit"
+}

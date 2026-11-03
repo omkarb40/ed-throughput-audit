@@ -2,7 +2,7 @@
 
 A study of US emergency department throughput using seven years of public CMS hospital quality data.
 
-**Status:** analysis complete. An interactive app is in progress.
+**Status:** analysis complete. The app in `app/` runs locally; public deployment is next.
 
 ## Short answer
 
@@ -15,6 +15,29 @@ The catch is who gets a number. Hospitals with no published value are disproport
 in poorer counties: the places where patients have the fewest alternatives.
 
 ![Decision test](reports/figures/13_decision.png)
+
+## The app
+
+`app/streamlit_app.py`: pick an emergency department and see its latest CMS number with a range for the next 12 months,
+its three nearest other EDs, and how often the lower published number has actually been the faster ED.
+
+- **3,914 EDs** show their current published number (Oct 2024 to Sep 2025) and a 90% range.
+- **48 EDs** have no current number but one from the last four years; the app shows that older number, dated, with a
+  wider range (back-tested coverage 86% to 90%, stated in the app).
+- **212 EDs** have no recent number; the app shows an estimate from the hospital's public profile, clearly labelled.
+- Every ED without a current number carries a warning to check it is open: CMS's list can include closed EDs
+  (e.g. Nashoba Valley Medical Center, which closed in August 2024).
+
+Run locally:
+
+```bash
+pip install -r app/requirements.txt
+streamlit run app/streamlit_app.py
+```
+
+or with Docker: `docker build -t ed-app app && docker run -p 8501:8501 ed-app`.
+
+The app reads only the small files in `app/data/` (built by `src/build_app_data.py`), so it needs no model library.
 
 ## The question
 
@@ -112,6 +135,7 @@ python src/decision_eval.py
 python src/conformal.py
 python src/slices.py
 python src/shap_profile.py
+python src/build_app_data.py
 python src/make_figures.py
 python -m pytest tests -q
 ```
@@ -125,6 +149,7 @@ API key. Raw and intermediate data are not committed.
 src/        pipeline, splits, features, metrics, models, figures
 tests/      split and leakage tests
 reports/    one write-up per step, plus figures
-models/     fitted public-profile model used by the app
+app/        Streamlit app, its data and Dockerfile
+models/     fitted public-profile model used to build the app data
 data/       manifest and source list (raw data not committed)
 ```
