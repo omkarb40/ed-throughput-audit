@@ -2,7 +2,7 @@
 
 A study of US emergency department throughput using seven years of public CMS hospital quality data.
 
-**Status:** analysis complete. The app in `app/` runs locally; public deployment is next.
+**Live app: [er-times.streamlit.app](https://er-times.streamlit.app)** · Status: analysis complete, app deployed.
 
 ## Short answer
 
@@ -18,7 +18,7 @@ in poorer counties: the places where patients have the fewest alternatives.
 
 ## The app
 
-`app/streamlit_app.py`: pick an emergency department and see its latest CMS number with a range for the next 12 months,
+**[er-times.streamlit.app](https://er-times.streamlit.app)** (`app/streamlit_app.py`): pick an emergency department and see its latest CMS number with a range for the next 12 months,
 its three nearest other EDs, and how often the lower published number has actually been the faster ED.
 
 - **3,914 EDs** show their current published number (Oct 2024 to Sep 2025) and a 90% range.
@@ -27,6 +27,8 @@ its three nearest other EDs, and how often the lower published number has actual
 - **212 EDs** have no recent number; the app shows an estimate from the hospital's public profile, clearly labelled.
 - Every ED without a current number carries a warning to check it is open: CMS's list can include closed EDs
   (e.g. Nashoba Valley Medical Center, which closed in August 2024).
+
+![App screenshot](docs/app_screenshot.png)
 
 Run locally:
 
@@ -150,6 +152,7 @@ src/        pipeline, splits, features, metrics, models, figures
 tests/      split and leakage tests
 reports/    one write-up per step, plus figures
 app/        Streamlit app, its data and Dockerfile
+docs/       app screenshot
 models/     fitted public-profile model used to build the app data
 data/       manifest and source list (raw data not committed)
 ```
