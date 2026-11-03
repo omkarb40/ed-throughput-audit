@@ -2,14 +2,21 @@
 
 A study of US emergency department throughput using seven years of public CMS hospital quality data.
 
-**Live app: [er-times.streamlit.app](https://er-times.streamlit.app)** · Status: analysis complete, app deployed.
+**Live app: [er-times.streamlit.app](https://er-times.streamlit.app)** · Author: Omkar Badadale ([portfolio](https://omkarb40.github.io), [GitHub](https://github.com/omkarb40))
+
+**Built with:** Python, pandas, Parquet, LightGBM, SHAP, statsmodels (fixed effects, mixed models),
+split conformal prediction, scikit-learn, pytest, Streamlit, Docker.
 
 ## Short answer
 
 Yes. If two emergency departments are near each other, the one with the lower published time last year was the
 faster one this year **86% of the time**, and following it saves a patient about **18 minutes** on average compared with
-picking at random. No model beat that number. A guess from everything public about a hospital (type, size, location,
-county income, insurance and age) picks the faster ED only **64%** of the time.
+picking at random. No model meaningfully improved on it: the best forecast gained 16 seconds. A guess from everything
+public about a hospital (type, size, location, county income, insurance and age) picks the faster ED only **64%** of the
+time.
+
+The number is a yearly median of arrival to departure, including treatment. It ranks EDs; it does not say how long you
+will wait tonight.
 
 The catch is who gets a number. Hospitals with no published value are disproportionately small, rural, for-profit and
 in poorer counties: the places where patients have the fewest alternatives.
@@ -34,7 +41,7 @@ Run locally:
 
 ```bash
 pip install -r app/requirements.txt
-streamlit run app/streamlit_app.py
+python -m streamlit run app/streamlit_app.py
 ```
 
 or with Docker: `docker build -t ed-app app && docker run -p 8501:8501 ed-app`.
