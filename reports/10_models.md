@@ -68,4 +68,4 @@ with the chosen settings, 2024 scored once. Chosen: A 31 leaves / 50 min samples
 - Model B: last value 0.27, state 0.20, deviation from own history 0.16, county population 0.05, prior volume 0.05.
   "Deviation from own history" ranking third means a small amount of mean reversion is real; it is the 0.27 minutes.
 
-Gain is a rough guide only. Proper attribution (SHAP) is planned for the final figures.
+Gain is a rough guide only. Exact SHAP attribution for the public-profile model is in `reports/16_shap.csv` and `reports/figures/16_shap.png`.

@@ -67,3 +67,13 @@ for a, b in pairs:
 cyr = pd.DataFrame(cyr); print("\ncalendar-year agreement (no overlap)\n", cyr.to_string(index=False))
 out["calendar_year_agreement"] = cyr.to_dict("records")
 json.dump(out, open("reports/07_target_eda.json", "w"), indent=1, default=str)
+
+# 6. implausible-jump flag: log distance from the hospital's own leave-one-out median (used by S10, S11)
+yj = y[["ccn", "year", "op18b"]].copy()
+yj["lg"] = np.log(yj.op18b)
+def _loo_median(s):
+    v = s.to_numpy()
+    return pd.Series([np.median(np.delete(v, i)) if len(v) > 1 else np.nan for i in range(len(v))], index=s.index)
+yj["jump"] = (yj.lg - yj.groupby("ccn").lg.transform(_loo_median)).abs()
+yj[["ccn", "year", "jump"]].to_parquet("data/interim/op18b_jump.parquet", index=False)
+print("implausible jumps (>2x own median):", int((yj.jump > np.log(2)).sum()))

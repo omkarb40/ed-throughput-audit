@@ -1,65 +1,88 @@
-# How much of an ER's wait time is structural?
+# Does a hospital's posted ER time tell patients anything?
 
 A study of US emergency department throughput using seven years of public CMS hospital quality data.
 
-**Status:** in progress. Data pipeline, data quality audit and baselines are done. Modeling is next.
+**Status:** analysis complete. An interactive app is in progress.
+
+## Short answer
+
+Yes. If two emergency departments are near each other, the one with the lower published time last year was the
+faster one this year **86% of the time**, and following it saves a patient about **18 minutes** on average compared with
+picking at random. No model beat that number. A guess from everything public about a hospital (type, size, location,
+county income, insurance and age) picks the faster ED only **64%** of the time.
+
+The catch is who gets a number. Hospitals with no published value are disproportionately small, rural, for-profit and
+in poorer counties: the places where patients have the fewest alternatives.
+
+![Decision test](reports/figures/13_decision.png)
 
 ## The question
 
-Some people argue hospitals should post ED wait times so patients feel less anxious and can choose where to go.
-That only helps if the number tells you something you couldn't already guess. This project asks how much of a
-hospital's ED time is a stable property of the hospital (its size, type, location, the county around it) and how
-much changes from year to year.
+The measure is CMS **OP-18b**: the median time patients spend in the ED before leaving, for discharged patients,
+excluding psychiatric patients and transfers. It is a yearly median that includes treatment time, not a live wait time.
 
-The measure is CMS **OP-18b**: the median time patients spend in the ED before leaving, excluding psychiatric
-patients and transfers. It is published per hospital as a rolling 12-month figure.
+Some argue hospitals should post ED times so patients can choose. That only helps if the number carries information a
+patient could not already guess. This project measures how stable the number is, how much of it can be predicted from
+public characteristics, and whether it would actually have pointed patients to the faster of two nearby EDs.
 
-## Data
+## Findings
 
-- 34 archived snapshots of the CMS Provider Data Catalog hospital files, March 2019 to September 2026
-  (`data/manifest.csv`). 33 contain the Timely and Effective Care file.
-- USDA Rural-Urban Continuum Codes 2023, Census 2023 Gazetteer and 2020 ZCTA-county files, ACS 2022 5-year county profile.
-  Sources and retrieval dates: `data/external_sources.md`.
+**1. ED time is a stable property of each hospital.** Almost 9 of every 10 units of variation in ED time are differences
+between hospitals; only about 1 in 10 is year-to-year change within a hospital. Consecutive years correlate at r = 0.94.
+([variance decomposition](reports/11_fe_results.md), [target study](reports/07_target_eda.md))
 
-Raw and intermediate data are not committed. Everything is rebuilt from the manifest with the scripts in `src/`.
+**2. Public characteristics explain some of it, not all.** Hospital type, state and ED volume explain most of what
+public data can explain. For critical access hospitals they explain only 15% of the differences between hospitals;
+the rest is specific to the individual hospital.
 
-## Findings so far
+![Variance sources](reports/figures/11_variance_sources.png)
 
-**Snapshots are not independent observations.** CMS publishes rolling 12-month windows that move forward one quarter
-at a time, so neighbouring snapshots share 9 of 12 months. The 33 files contain 28 distinct OP-18b windows and only
-6 non-overlapping calendar years: 2018, 2019, 2021, 2022, 2023, 2024. There is no 2020 because CMS never reported
-the first half of that year. ([recon](reports/01_data_recon.md))
+**3. Last year's number is the forecast.** A LightGBM forecast beat "same as last year" by 0.27 minutes (about 16
+seconds). A model that only knows a hospital's public profile is off by 25.5 minutes on hospitals it has never seen,
+against 11.9 for last year's number. ([models](reports/10_models.md))
 
-**CMS revises published numbers.** When a window was republished in a later snapshot, 25% of OP-18b values changed,
-by up to 64 minutes. The panel always uses the latest version. ([panel](reports/04_panel.md))
+![Model comparison](reports/figures/10_model_comparison.png)
 
-**Missing data is not random.** 13.8% of hospital-years have no published OP-18b. Critical access hospitals are 5.7
-times as likely to be suppressed as acute care hospitals, and physician-owned and tribal hospitals far more so. Low-volume
-EDs are where the gaps are. Dropping hospitals with gaps would remove faster, smaller EDs and bias the sample, so they
-stay in. ([suppression audit](reports/05_suppression.md))
+**4. Honest ranges work.** 90% prediction intervals around last year's number (typically ±25 minutes) covered 91% of
+2024 values, after calibration on 2023 only. They are too narrow for hospitals whose last number carried a CMS footnote
+(80% coverage) unless those get their own, wider calibration. ([intervals](reports/14_intervals.md))
 
-![Reporting status](reports/figures/05_reporting_status.png)
+**5. The gap is who gets a number, not how good it is.** When a hospital has a number, its typical error is 5.5% to
+6.6% in every group studied. But for-profit EDs and EDs in the poorest quarter of counties are more than twice as likely
+as non-profits to have no published value. ([slices](reports/15_slices.md), [suppression audit](reports/05_suppression.md))
 
-**ED time is very persistent.** Non-overlapping calendar years correlate at r = 0.94 (log scale), with a typical change
-of 9 minutes. Even 2018 against 2024 correlates at 0.82. ([target exploration](reports/07_target_eda.md))
+![Gap vs error](reports/figures/15_gap_vs_error.png)
 
-![Window agreement](reports/figures/07_window_agreement.png)
+## Data quality findings along the way
 
-## Baselines (frozen, 2024 test year)
+- CMS snapshots are not independent: rolling 12-month windows move a quarter at a time, so 33 snapshot files contain
+  only 6 non-overlapping calendar years (2018, 2019, 2021 to 2024; no 2020). ([recon](reports/01_data_recon.md))
+- CMS revises published numbers: 25% of OP-18b values changed when a window was republished, by up to 64 minutes.
+  ([panel](reports/04_panel.md))
+- Missing values are not random: critical access hospitals are 5.7 times as likely to be suppressed as acute care
+  hospitals, so dropping incomplete hospitals would bias the sample. ([suppression audit](reports/05_suppression.md))
 
-| Baseline | Hospitals | MAE (min) | Rank correlation |
-|---|---|---|---|
-| Last year's value | 3,997 | 11.9 | 0.953 |
-| State and hospital type median, hospitals not seen in training | 832 | 29.0 | 0.675 |
+## Methods in brief
 
-Any model has to be compared against these. Details and confidence intervals: [baselines](reports/09_baselines.md).
+| Step | What | Report |
+|---|---|---|
+| Data | 34 CMS archive snapshots (2019 to 2026), USDA rurality codes, Census geography, ACS county data | [01](reports/01_data_recon.md), [02](reports/02_loader.md), [06](reports/06_geo_joins.md) |
+| Panel | 375,784 hospital × window × measure rows; latest revision of each window | [04](reports/04_panel.md) |
+| Splits | Forecast split by year; structural split by year **and** hospital, with leakage tests that were checked to fail on purpose | [08](reports/08_splits.md) |
+| Baselines | Last year's value; state × type median | [09](reports/09_baselines.md) |
+| Models | LightGBM on log ED time relative to the national median; paired bootstrap comparisons | [10](reports/10_models.md) |
+| Variance | Two-way fixed effects plus a random-intercept model to correct for noisy hospital averages | [11](reports/11_fe_results.md) |
+| Decision test | 2,980 nearest-ED pairs; would the numbers have picked the faster ED in 2024? | [13](reports/13_decision.md) |
+| Intervals | Split conformal, calibrated on 2023, per-group calibration | [14](reports/14_intervals.md) |
+| Fairness | Error, coverage, decision accuracy and missing data by group | [15](reports/15_slices.md) |
+| Attribution | Exact TreeSHAP on the public-profile model | [16_shap.csv](reports/16_shap.csv) |
 
-## Next
+## Limits
 
-- Structural model: how much of the gap between 29.0 and 11.9 minutes is explained by what a hospital is, for hospitals it has never seen
-- Forecasting model against the last-year baseline
-- Fixed-effects split of variance into between-hospital and within-hospital
-- Nearest-alternative-ED comparison, prediction intervals, error by hospital type and rurality
+- OP-18b is a yearly median of arrival to departure, including treatment. It ranks EDs; it does not tell you how long
+  you will wait tonight.
+- Distances are between ZIP centroids, not driving times; each ED is compared with one alternative.
+- County income, insurance and age describe the county, not a hospital's patients.
 
 ## Reproduce
 
@@ -68,25 +91,40 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python src/build_manifest.py
 python src/download_all.py
-PYTHONPATH=src python src/recon_schema.py
-PYTHONPATH=src python src/build_long.py
-PYTHONPATH=src python src/build_panel.py
-PYTHONPATH=src python src/build_hospital_attrs.py
-PYTHONPATH=src python src/suppression_audit.py
-PYTHONPATH=src python src/build_geo.py
-PYTHONPATH=src python src/build_analysis_table.py
-PYTHONPATH=src python src/baselines.py
-PYTHONPATH=src python -m pytest tests -q
+export PYTHONPATH=src
+python src/inventory_zips.py
+python src/recon_schema.py
+python src/recon_op18.py
+python src/build_long.py
+python src/build_panel.py
+python src/build_hospital_attrs.py
+python src/suppression_audit.py
+python src/build_geo.py
+python src/build_analysis_table.py
+python src/target_eda.py
+python src/split_report.py
+python src/baselines.py
+python src/models.py
+python src/fe_decomposition.py
+python src/fe_feature_groups.py
+python src/build_pairs.py
+python src/decision_eval.py
+python src/conformal.py
+python src/slices.py
+python src/shap_profile.py
+python src/make_figures.py
+python -m pytest tests -q
 ```
 
-The county joins need the files listed in `data/external_sources.md` in `data/external/`. The ACS file needs a free
-Census API key.
+County joins need the files in `data/external_sources.md` saved to `data/external/`; the ACS file needs a free Census
+API key. Raw and intermediate data are not committed.
 
 ## Layout
 
 ```
-src/        pipeline, splits, features, metrics, baselines
+src/        pipeline, splits, features, metrics, models, figures
 tests/      split and leakage tests
 reports/    one write-up per step, plus figures
+models/     fitted public-profile model used by the app
 data/       manifest and source list (raw data not committed)
 ```
