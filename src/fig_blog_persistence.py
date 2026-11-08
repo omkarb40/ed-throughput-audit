@@ -30,5 +30,5 @@ fig.text(0.03, 0.885, f"Each dot is one of {len(w):,} US hospitals. Blue line = 
          color=INK2, linespacing=1.4)
 fig.text(0.03, 0.012, "Data: CMS Timely and Effective Care, measure OP-18b (log scales).", fontsize=8.5, color=INK2)
 fig.tight_layout(rect=(0, 0.03, 1, 0.885))
-fig.savefig("docs/blog/persistence_2023_2024.png", dpi=200, facecolor=SURF)
+fig.savefig("docs/blog/1_persistence_2023_2024.png", dpi=200, facecolor=SURF)
 print(f"hospitals {len(w)} | r(log) {r:.3f} | median abs change {med_change:.1f} | within 15 min {within15:.1f}%")
