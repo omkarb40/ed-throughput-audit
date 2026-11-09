@@ -38,6 +38,8 @@ def pick_confidence(gap):
 st.title("How long do nearby ERs take?")
 st.caption(f"Median time patients spent in the emergency department before going home, as published by CMS "
            f"(measure OP-18b) for **{WIN}**. Not a live wait time. [How this was built]({meta['repo']})")
+st.warning("This compares hospitals' past performance. It is not a tool for deciding where to seek emergency care. "
+           "**In a medical emergency, call 911.**", icon="🚑")
 
 states = sorted(h.state.unique())
 c1, c2 = st.columns([1, 3])
@@ -126,7 +128,7 @@ with st.expander("What this number is, and what it is not"):
     st.markdown(f"""
 - **What it is.** CMS measure OP-18b: the median time from arrival to leaving the ED for patients who were sent home,
   excluding psychiatric patients and transfers, over 12 months. It includes treatment time, not just waiting.
-- **What it is not.** A live or tonight's wait. In an emergency, go to the nearest ED or call 911.
+- **What it is not.** A live or tonight's wait, or advice on where to go. In a medical emergency, call 911.
 - **Why compare it at all.** In 2024, for nearby pairs of EDs, the one with the lower number the year before was the
   faster one **86%** of the time. A guess from public facts about the hospital managed 64%.
 - **Ranges.** 90% ranges from split conformal prediction, calibrated on 2023 and checked on 2024.

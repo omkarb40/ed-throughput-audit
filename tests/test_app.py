@@ -27,7 +27,8 @@ def test_each_kind_renders(kind):
         assert any("publishes no number" in i.value for i in at.info)
         assert any("open before relying" in w.value for w in at.warning), "closure warning missing"
     if kind == "footnoted":
-        assert at.warning, "footnote warning missing"
+        assert any("footnote" in w.value for w in at.warning), "footnote warning missing"
+    assert any("call 911" in w.value for w in at.warning), "emergency warning missing"
 
 
 def test_every_state_first_hospital():

@@ -1,0 +1,5 @@
+number_year,outcome_year,pairs,pct_correct,median_gap_vs_coin_min,note
+2021,2022,2407,86.4,19.2,
+2022,2023,2436,86.2,19.2,
+2023,2024,2472,85.8,18.6,
+2023,2024,2501,85.8,,"main S13 set; hospital-clustered 95% CI 84.8-86.8; 3604 hospitals, 1230 in more than one pair"
